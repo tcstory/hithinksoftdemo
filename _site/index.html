@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title></title>
+    <link rel="stylesheet" href="dist/semantic.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/jquery.easing.min.js"></script>
+    <script src="dist/semantic.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <header>
+                <div class="header-left">
+                    <a href="">
+                    <img width="75%" src="images/logo.png" alt=""/>
+                    </a>
+                </div>
+                <div class="header-right">
+                    <div class="header-contacts">
+                        <span class="header-phone"><i class="mail icon"></i>+86-512-36681800</span>
+                        <span class="header-mail"><i class="call icon"></i>guangyan.xie@dhc.com.cn</span>
+                    </div>
+                    <div class="header-contacts">
+                        <a href="">中文</a>
+                        <a href="">English</a>
+                        <a href="">日本語</a>
+                    </div>
+                </div>
+            </header>
+            <nav class="ui menu">
+                <div class="menu">
+                    <div class="item">Home</div>
+                    <div class="ui dropdown item">
+                        <span>About Us</span>
+                        <i class="angle down icon"></i>
+                        <div class="menu">
+                            <a class="item" href="">公司简介</a>
+                            <a class="item" href=""><span>企业文化</span></a>
+                            <a class="item" href="">发展历程</a>
+                            <a class="item" href="">荣誉展示</a>
+                            <a class="item" href="">资质认证</a>
+                        </div>
+                    </div>
+                    <div class="ui dropdown item">
+                        <span>News Focus</span>
+                        <i class="angle down icon"></i>
+                        <div class="menu">
+                            <a href="" class="item">公司新闻</a>
+                            <a href="" class="item">媒体看华信</a>
+                        </div>
+                    </div>
+                    <div class="ui dropdown item">
+                        <span>Solutions</span>
+                        <i class="angle down icon"></i>
+                        <div class="menu">
+                            <a href="" class="item">服务</a>
+                            <a href="" class="item">产品及解决方案</a>
+                        </div>
+                    </div>
+                    <div class="ui dropdown item">
+                        <span>Careers</span>
+                        <i class="angle down icon"></i>
+                        <div class="menu">
+                            <a href="" class="item">昆山</a>
+                            <a href="" class="item">大连</a>
+                            <a href="" class="item">济南</a>
+                            <a href="" class="item">深圳</a>
+                            <a href="" class="item">天津</a>
+                            <a href="" class="item">DHC Life</a>
+                        </div>
+                    </div>
+                    <div class="ui dropdown item">
+                        <span>Contact Us</span>
+                        <i class="angle down icon"></i>
+                        <div class="menu">
+                            <a href="" class="item">Contact Us</a>
+                            <a href="" class="item">Address</a>
+                            <a href="" class="item">Online Submit</a>
+                        </div>
+                    </div>
+                    <div class="ui dropdown item">
+                        <span>Internal System</span>
+                        <i class="angle down icon"></i>
+                        <div class="menu">
+                            <a href="" class="item">KMS System</a>
+                        </div>
+                    </div>
+                    <div class="ui dropdown item">
+                        <span>Entry Test</span>
+                        <i class="angle down icon"></i>
+                        <div class="menu">
+                            <a href="" class="item">Test System</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div class="row">
+                <div class="slide-holder">
+                    <div class="prev-btn"><span></span></div>
+                    <div class="next-btn"><span></span></div>
+                    <ul class="slides">
+                        <li class="slide-item"><img src="images/1395886613598.jpg" alt=""/></li>
+                        <li class="slide-item"><img src="images/1395731468318.jpg" alt=""/></li>
+                        <li class="slide-item"><img src="images/1395885207753.jpg" alt=""/></li>
+                        <li class="slide-item"><img src="images/1425450626743.jpg" alt=""/></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.dropdown').dropdown({
+            transition: 'drop',
+            on: 'hover'
+        });
+        (function () {
+            var objMap;
+            var configMap;
+            var stateMap;
+
+            var initialize;
+
+            initialize = function () {
+                objMap = {
+                    $slide_items: $('.slide-item'),
+                    slide_items: $('.slide-item').toArray(),
+                    $slide_holder: $('.slide-holder'),
+                    $slide_btn: $('.prev-btn, .next-btn')
+                };
+
+                stateMap = {
+                    bool_continue: true  //鼠标进去slide,停止图片滑动
+                };
+                configMap = {
+                    interval_time: 1500
+                };
+
+
+                // ----- 设置鼠标移入移出slide的事件 -----
+                objMap.$slide_holder.on('mouseenter', function (event) {
+                    objMap.$slide_btn.css({
+                        'opacity':.7
+                    });
+                    stateMap.bool_continue = false;
+                });
+                objMap.$slide_holder.on('mouseleave', function (event) {
+                    objMap.$slide_btn.css('opacity', 0);
+                    stateMap.bool_continue = true;
+                    // 鼠标移出slide后,2.5s后再滑动图片
+                    setTimeout(function () {
+                        $(objMap.slide_items[0]).trigger('moveend');
+                    }, configMap.interval_time);
+                });
+                // ----- END -----
+
+
+                // ----- 设置slides上按钮的事件  -----
+                objMap.$slide_btn.eq(0).click(function (event) {
+                    $(objMap.slide_items[0]).fadeOut(1000, function () {
+                        var _temp = objMap.slide_items.pop();
+                        objMap.slide_items.unshift(_temp);
+                        console.log(objMap.slide_items[0]);
+                        $(objMap.slide_items[0]).fadeIn(1000);
+                    });
+                });
+                objMap.$slide_btn.eq(1).click(function (event) {
+                    console.log(objMap.slide_items[0]);
+                    $(objMap.slide_items[0]).fadeOut(1000, function () {
+                        var _temp = objMap.slide_items.shift();
+                        objMap.slide_items.push(_temp);
+                        $(objMap.slide_items[0]).fadeIn(1000);
+                    });
+                });
+
+                // ----- END -----
+
+
+                // ----- 设置slides的轮播   -----
+                objMap.$slide_items.on('movestart', function (event) {
+                    $(event.target).fadeIn(configMap.interval_time, function () {
+                        $(event.target).trigger('moveend');
+                    });
+                });
+                objMap.$slide_items.on('moveend', function (event) {
+                    if (stateMap.bool_continue) {
+                        $(this).fadeOut(configMap.interval_time, function () {
+                            var _temp = objMap.slide_items.shift();
+                            objMap.slide_items.push(_temp);
+                            $(objMap.slide_items[0]).trigger('movestart');
+                        });
+                    }
+                });
+                // ----- END -----
+
+
+                objMap.$slide_items.css('display', 'none');// 使用fadeIn之前,要保证DOM对象的display为none,否则每一个DOM对象第一次运行fadeIn的时候会跳过设置好的过渡时间,fadeIn会瞬间执行完毕
+                objMap.$slide_items.eq(0).trigger('movestart');
+            };
+            initialize();
+        })();
+    </script>
+</body>
+</html>

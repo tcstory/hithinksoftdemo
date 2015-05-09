@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title></title>
+    <link rel="stylesheet" href="dist/semantic.css"/>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="dist/semantic.js"></script>
+    <style>
+        .btn {
+            background-color: #2ecc40;
+            width: 50px;
+            height: 50px;
+            margin: 2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="btn">Button 1</div>
+    <div class="btn">Button 2</div>
+</div>
+<script>
+    "use strict";
+    var btns = $('.btn');
+    btns.on('starting', function () {
+//        $(this).fadeOut(5000, function () {
+//            console.log('starting');
+//            $(this).trigger('ending');
+//        });
+        $(this).animate({
+            opacity: 1
+        }, {
+            duration: 4000,
+            complete: function () {
+                console.log('Done');
+            }
+        });
+    });
+//    btns.on('ending', function () {
+//        $(this).fadeIn(5000, function () {
+//            console.log('ending');
+//            btns.eq(1).trigger('starting');
+//        });
+//    });
+</script>
+</body>
+</html>
